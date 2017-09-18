@@ -4,6 +4,9 @@ from keras.utils import np_utils # utilities for one-hot encoding of ground trut
 from keras.models import model_from_json
 import numpy
 
+data_path = "../../data/lol/"
+model_path = "../../data/model/"
+
 batch_size = 50 # in each iteration, we consider 128 training examples at once
 num_epochs = 20 # we iterate twenty times over the entire training set
 hidden_size = 20 # there will be 512 neurons in both hidden layers
@@ -14,7 +17,7 @@ num_test = 10000 # there are 10000 test examples in MNIST
 id_to_wr = dict()
 wr_to_id = dict()
 
-with open('champId_winRate.psv') as f:
+with open(data_path + 'champId_winRate.psv') as f:
 	for line in f:
 		str_list = line.split(' ', 2)
 		champId = int(str_list[0])
@@ -22,8 +25,8 @@ with open('champId_winRate.psv') as f:
 		id_to_wr[champId] = winRate
 		wr_to_id[winRate] = champId
 
-with open("Big_Data.psv") as fin:
-    with open("winRates_commandWin.psv", "w") as fout:
+with open(data_path + "Big_Data.psv") as fin:
+    with open(data_path + "winRates_commandWin.psv", "w") as fout:
         for line in fin:
         	str_list = line.split(" ")[ :-1] # without \n
         	champIds = [int(s) for s in str_list[ :-1]] # without commandWin
@@ -45,7 +48,7 @@ X_test = []
 Y_train = []
 Y_test = []
 
-with open("winRates_commandWin.psv") as f:
+with open(data_path + "winRates_commandWin.psv") as f:
 	i = 0
 	for line in f:
 		str_list = line.split(" ")
@@ -100,9 +103,9 @@ print "\nresult", loss_and_metrics[1]
 
 # serialize model to JSON
 model_json = model.to_json()
-with open("model.json", "w") as json_file:
+with open(model_path + "model.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
-model.save_weights("model.h5")
+model.save_weights(model_path + "model.h5")
 
 

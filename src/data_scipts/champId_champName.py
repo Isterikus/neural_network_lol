@@ -1,18 +1,14 @@
+data_path = "../../data/lol/"
 
-id_to_wr = dict()
-wr_to_id = dict()
-
-with open('champId_winRate.psv') as f:
+with open(data_path + 'champId_champName.psv') as f:
+	id_to_name = dict()
+	name_to_id = dict()
 	for line in f:
 		str_list = line.split(' ', 2)
 		champId = int(str_list[0])
-		winRate = float(str_list[1].replace('\n', ''))
-		id_to_wr[champId] = winRate
-		wr_to_id[winRate] = champId
-
-print(id_to_wr)
-def getWr(champId):
-	return id_to_wr[champId]
+		champName = str_list[1][ :-1]
+		id_to_name[champId] = champName
+		name_to_id[champName] = champId
 
 if __name__ == '__main__':
 	tmp = '.'
@@ -24,5 +20,3 @@ if __name__ == '__main__':
 			print(id_to_name[mainChampId], '\n')
 		except:
 			pass
-
-

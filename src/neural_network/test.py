@@ -27,10 +27,12 @@ with open("winRates_commandWin.psv") as fin:
 	print("writed %d test_data.psv")
 
 '''
+data_path = "../../data/lol/"
+
 data = {}
 c_champs_count = 10
 # if (out == 1) ? (RED TEAM WIN) || (BLUE TEAM WIN)
-with open("winRates_commandWin.psv") as fin:
+with open(data_path + "winRates_commandWin.psv") as fin:
 	strs = fin.read.split('\n')
 	rng = int(len(strs) / 0.75)
 	for i in range(strs):

@@ -3,10 +3,12 @@ import json
 import collections
 import statistics
 
+data_path = "../../data/lol/"
+
 r = requests.get(r"http://api.champion.gg/v2/champions?champData=winRate&limit=200&api_key=fdbf5df90189c7cb9d5849731fddd7be")
 champs = json.loads(r.text)
 
-with open("champId_winRate.psv", 'w') as f:
+with open(data_path + "champId_winRate.psv", 'w') as f:
 	arr = dict()
 	for champ in champs:
 		champ_id = champ['championId']
